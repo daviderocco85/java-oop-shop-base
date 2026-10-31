@@ -37,6 +37,7 @@ Viene creato un nuovo prodotto passando al costruttore:
 - Nome del prodotto.
 - Descrizione.
 - Prezzo base.
+
 Successivamente vengono stampate a console le seguenti informazioni:
 
 - Codice numerico intero identificativo.
