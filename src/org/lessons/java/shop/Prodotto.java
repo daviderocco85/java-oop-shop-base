@@ -7,32 +7,8 @@ import java.util.Random;
 public class Prodotto {
 
     private int codeNumber;
-    private double price, ivaTax;
     private BigDecimal prezzo, iva;
     private String name, description, brand;
-
-    public Prodotto(String name, String brand, String description, double price, double ivaTax) {
-
-        if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Il nome del prodotto non può essere nullo o vuoto");
-        }
-
-        if (brand == null || brand.isBlank()) {
-            throw new IllegalArgumentException("Il brand del prodotto non può essere nullo o vuoto");
-        }
-
-        if (price <= 0 || ivaTax < 0) {
-            throw new IllegalArgumentException("Prezzo o IVA non validi");
-        }
-
-        this.codeNumber = new Random().nextInt(100) + 1;
-        this.name = name;
-        this.brand = brand;
-        this.description = description;
-        this.price = price;
-        this.ivaTax = ivaTax;
-
-    }
 
     public Prodotto(String name, String brand, String description, BigDecimal prezzo, BigDecimal iva) {
 
@@ -46,8 +22,8 @@ public class Prodotto {
 
         if (prezzo == null || iva == null ||
                 prezzo.compareTo(BigDecimal.ZERO) <= 0 ||
-                iva.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("Prezzo o IVA non validi");
+                iva.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Il Prezzo e o l'IVA non possono essere inferiori o uguali a 0");
         }
 
         this.codeNumber = new Random().nextInt(100) + 1;
@@ -56,6 +32,12 @@ public class Prodotto {
         this.description = description;
         this.prezzo = prezzo;
         this.iva = iva;
+    }
+
+    public Prodotto(String name, String brand,
+            BigDecimal prezzo, BigDecimal iva) {
+
+        this(name, brand, "", prezzo, iva);
     }
 
     public int getCodeNumber() {
@@ -94,18 +76,6 @@ public class Prodotto {
         this.description = description;
     }
 
-    public double getBasePrice() {
-        return this.price;
-    }
-
-    public void setBasePrice(double price) {
-        if (price <= 0) {
-            System.out.println("Il prezzo non può essere inferiore o uguale a 0");
-        } else {
-            this.price = price;
-        }
-    }
-
     public BigDecimal getPrezzo() {
         return this.prezzo;
     }
@@ -118,30 +88,16 @@ public class Prodotto {
         }
     }
 
-    public double getIvaTax() {
-        return this.ivaTax;
-    }
-
-    public void setIvaTax(double ivaTax) {
-        if (ivaTax < 0) {
-            System.out.println("L'IVA non può essere inferiore a 0");
-        }
-        this.ivaTax = ivaTax;
-    }
-
     public BigDecimal getIva() {
         return this.iva;
     }
 
     public void setIva(BigDecimal iva) {
-        if (iva == null || iva.compareTo(BigDecimal.ZERO) < 0) {
-            System.out.println("L'IVA non può essere inferiore a 0");
+        if (iva == null || iva.compareTo(BigDecimal.ZERO) <= 0) {
+            System.out.println("L'IVA non può essere inferiore o uguale a 0");
+        } else {
+            this.iva = iva;
         }
-        this.iva = iva;
-    }
-
-    public double getPriceWithIvaTax() {
-        return Math.round((this.price + (this.price * this.ivaTax)) * 100.0) / 100.0;
     }
 
     public BigDecimal getPrezzoIvato() {
