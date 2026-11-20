@@ -17,7 +17,6 @@ public class Main {
         Prodotto prodotto2 = new Prodotto("Laptop", "Apple", new BigDecimal("1199.99"), new BigDecimal("0.22"));
         System.out.println("Numero prodotto con nome: " + prodotto2.getNameWithCode());
         System.out.println("Brand prodotto: " + prodotto2.getBrand());
-        System.out.println("Descrizione prodotto: " + prodotto2.getDescription());
         System.out.println("Prezzo base: " + prodotto2.getPrezzo() + " Euro");
         System.out.println("Prezzo con IVA: " + prodotto2.getPrezzoIvato() + " Euro");
 
